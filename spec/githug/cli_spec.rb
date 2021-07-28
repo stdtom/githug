@@ -123,7 +123,10 @@ describe Githug::CLI do
 
   describe "#levels" do
 
+    let(:profile) { mock }
+    
     it "prints the levels and their numbers" do
+      Githug::Profile.stub(:load).and_return(profile)
       Githug::Level.stub(:list).and_return(["commit", "add"])
       Githug::UI.should_receive(:puts).with(["#1: commit", "#2: add"])
       subject.levels
